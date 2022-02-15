@@ -1,15 +1,20 @@
 package com.example.androidstudyguid.articlelist
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidstudyguid.data.InMemoryArticleRepository
 import com.example.androidstudyguid.databinding.FragmentArticleListBinding
 import com.example.androidstudyguid.models.Article
+import kotlinx.coroutines.launch
 
 class ArticleListFragment : Fragment() {
     override fun onCreateView(
@@ -18,17 +23,20 @@ class ArticleListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentArticleListBinding.inflate(inflater, container, false)
-
-        val adapter = ArticleAdapter()
+        val repository = InMemoryArticleRepository()
+        val adapter = ArticleAdapter(object : ArticleAdapter.OnArticleClickListener {
+            override fun onArticleClick(article: Article) {
+                val uri = Uri.parse(article.url)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
+        })
 
         setupRecyclerView(binding.articleList, adapter)
 
-        val articles = arrayListOf<Article>().apply {
-            for (i in 1..DEFAULT_ITEM_COUNT) {
-                add(Article(i, "Title $i", "Author $i", "www.article$i.com"))
-            }
+        lifecycleScope.launch {
+            adapter.submitList(repository.fetchArticles())
         }
-        adapter.submitList(articles)
 
         return binding.root
     }
@@ -48,6 +56,6 @@ class ArticleListFragment : Fragment() {
     }
 
     companion object {
-        const val DEFAULT_ITEM_COUNT = 10
+        const val DEFAULT_ITEM_COUNT = 50
     }
 }

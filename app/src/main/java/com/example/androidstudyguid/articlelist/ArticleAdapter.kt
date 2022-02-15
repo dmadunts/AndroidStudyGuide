@@ -8,13 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidstudyguid.databinding.ListItemArticleBinding
 import com.example.androidstudyguid.models.Article
 
-class ArticleAdapter : ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(differ) {
+class ArticleAdapter(private val listener: OnArticleClickListener) :
+    ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(differ) {
+    interface OnArticleClickListener {
+        fun onArticleClick(article: Article)
+    }
+
     inner class ArticleViewHolder(private val binding: ListItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article) {
             binding.articleTitle.text = article.title
             binding.articleAuthor.text = article.authorName
+            itemView.setOnClickListener {
+                listener.onArticleClick(article)
+            }
         }
     }
 
