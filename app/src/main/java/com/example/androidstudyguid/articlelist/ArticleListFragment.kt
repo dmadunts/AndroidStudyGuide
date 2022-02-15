@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,14 +20,26 @@ import com.example.androidstudyguid.models.Article
 import kotlinx.coroutines.launch
 
 class ArticleListFragment : Fragment() {
+    private val viewModel: ArticleListViewModel by viewModels {
+        articleViewModelFactory
+    }
+    private lateinit var adapter: ArticleAdapter
+    private var _binding: FragmentArticleListBinding? = null
+    private val binding get() = _binding!!
+    private val articleViewModelFactory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
+            return ArticleListViewModel(InMemoryArticleRepository()) as T
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentArticleListBinding.inflate(inflater, container, false)
-        val repository = InMemoryArticleRepository()
-        val adapter = ArticleAdapter(object : ArticleAdapter.OnArticleClickListener {
+        _binding = FragmentArticleListBinding.inflate(inflater, container, false)
+        adapter = ArticleAdapter(object : ArticleAdapter.OnArticleClickListener {
             override fun onArticleClick(article: Article) {
                 val uri = Uri.parse(article.url)
                 val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -34,11 +49,20 @@ class ArticleListFragment : Fragment() {
 
         setupRecyclerView(binding.articleList, adapter)
 
-        lifecycleScope.launch {
-            adapter.submitList(repository.fetchArticles())
-        }
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        subscribeToViewModel()
+    }
+
+    private fun subscribeToViewModel() {
+        viewModel.articles.observe(viewLifecycleOwner) { articles ->
+            lifecycleScope.launch {
+                adapter.submitList(articles)
+            }
+        }
     }
 
     private fun <VH : RecyclerView.ViewHolder> setupRecyclerView(
@@ -53,6 +77,11 @@ class ArticleListFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
