@@ -42,7 +42,7 @@ class ArticleListFragment : Fragment() {
         _binding = FragmentArticleListBinding.inflate(inflater, container, false)
         adapter = ArticleAdapter(object : ArticleAdapter.OnArticleClickListener {
             override fun onArticleClick(article: Article) {
-                val uri = Uri.parse(article.url)
+                val uri = Uri.parse(article.id)
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
