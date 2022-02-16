@@ -14,7 +14,7 @@ class InMemoryArticleRepository(private val dispatcher: CoroutineDispatcher = IO
                 for (i in 1..ArticleListFragment.DEFAULT_ITEM_COUNT) {
                     add(
                         Article(
-                            i,
+                            "$i",
                             "Title $i",
                             "Author $i",
                             "https://github.com/dmadunts/AndroidStudyGuide"

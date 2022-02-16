@@ -14,7 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidstudyguid.data.InMemoryArticleRepository
+import com.example.androidstudyguid.data.AndroidEssenceArticleService
+import com.example.androidstudyguid.data.remote.androidessence.AndroidEssenceAPI
 import com.example.androidstudyguid.databinding.FragmentArticleListBinding
 import com.example.androidstudyguid.models.Article
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class ArticleListFragment : Fragment() {
     private val articleViewModelFactory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return ArticleListViewModel(InMemoryArticleRepository()) as T
+            return ArticleListViewModel(AndroidEssenceArticleService(api = AndroidEssenceAPI.getDefaultApi())) as T
         }
     }
 
