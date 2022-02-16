@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.androidstudyguid.data.remote.androidessence
 
 import com.example.androidstudyguid.data.remote.androidessence.models.AndroidEssenceFeed
