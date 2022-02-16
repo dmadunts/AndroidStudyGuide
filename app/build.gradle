@@ -63,8 +63,6 @@ ktlint {
     android = true
     reporters {
         reporter "plain"
-        reporter "checkstyle"
-        reporter "sarif"
     }
     outputColorName = "RED"
 }
