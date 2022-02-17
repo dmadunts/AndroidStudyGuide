@@ -1,4 +1,4 @@
-package com.example.androidstudyguid.models
+package com.example.androidstudyguid.data.models.ui
 
 data class Article(
     val id: String,

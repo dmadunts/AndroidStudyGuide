@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/articleListFragment"
-        android:name="com.example.androidstudyguid.articlelist.ArticleListFragment"
+        android:name="com.example.androidstudyguid.ui.articlelist.ArticleListFragment"
         android:label="fragment_article_list"
         tools:layout="@layout/fragment_article_list" />
 </navigation>

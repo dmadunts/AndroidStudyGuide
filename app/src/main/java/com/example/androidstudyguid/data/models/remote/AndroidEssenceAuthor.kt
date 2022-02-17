@@ -1,4 +1,4 @@
-package com.example.androidstudyguid.data.remote.androidessence.models
+package com.example.androidstudyguid.data.models.remote
 
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
@@ -7,5 +7,5 @@ import org.simpleframework.xml.Root
 data class AndroidEssenceAuthor(
     @field:Element(name = "name")
     @param:Element(name = "name")
-    val name: String = ""
+    val name: String? = null
 )

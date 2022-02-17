@@ -1,4 +1,4 @@
-package com.example.androidstudyguid.data.remote.androidessence.models
+package com.example.androidstudyguid.data.models.remote
 
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Root
@@ -7,5 +7,5 @@ import org.simpleframework.xml.Root
 data class AndroidEssenceLink(
     @field:Attribute(name = "href")
     @param:Attribute(name = "href")
-    val href: String = ""
+    val href: String? = null
 )

@@ -1,12 +1,12 @@
-package com.example.androidstudyguid.articlelist
+package com.example.androidstudyguid.ui.articlelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidstudyguid.data.models.ui.Article
 import com.example.androidstudyguid.databinding.ListItemArticleBinding
-import com.example.androidstudyguid.models.Article
 
 class ArticleAdapter(private val listener: OnArticleClickListener) :
     ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(differ) {
