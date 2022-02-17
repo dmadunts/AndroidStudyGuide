@@ -1,4 +1,4 @@
-package com.example.androidstudyguid.data.remote.androidessence.models
+package com.example.androidstudyguid.data.models.remote
 
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
@@ -7,5 +7,5 @@ import org.simpleframework.xml.Root
 data class AndroidEssenceFeed(
     @field:ElementList(name = "entry", inline = true)
     @param:ElementList(name = "entry", inline = true)
-    val items: List<AndroidEssenceFeedItem>
+    val items: List<AndroidEssenceFeedItem>? = null
 )

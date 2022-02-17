@@ -1,11 +1,11 @@
-package com.example.androidstudyguid.articlelist
+package com.example.androidstudyguid.ui.articlelist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.androidstudyguid.data.ArticleRepository
-import com.example.androidstudyguid.models.Article
+import com.example.androidstudyguid.data.models.ui.Article
+import com.example.androidstudyguid.data.repositories.interfaces.ArticleRepository
 import kotlinx.coroutines.launch
 
 class ArticleListViewModel(articleRepository: ArticleRepository) : ViewModel() {

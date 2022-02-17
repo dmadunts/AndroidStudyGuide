@@ -1,4 +1,4 @@
-package com.example.androidstudyguid.articlelist
+package com.example.androidstudyguid.ui.articlelist
 
 import android.content.Intent
 import android.net.Uri
@@ -14,10 +14,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidstudyguid.data.AndroidEssenceArticleService
-import com.example.androidstudyguid.data.remote.androidessence.AndroidEssenceAPI
+import com.example.androidstudyguid.data.apis.AndroidEssenceAPI
+import com.example.androidstudyguid.data.models.ui.Article
+import com.example.androidstudyguid.data.repositories.implementations.AndroidEssenceArticleService
 import com.example.androidstudyguid.databinding.FragmentArticleListBinding
-import com.example.androidstudyguid.models.Article
 import kotlinx.coroutines.launch
 
 class ArticleListFragment : Fragment() {

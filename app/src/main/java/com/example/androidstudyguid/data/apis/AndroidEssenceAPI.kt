@@ -1,8 +1,8 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.androidstudyguid.data.remote.androidessence
+package com.example.androidstudyguid.data.apis
 
-import com.example.androidstudyguid.data.remote.androidessence.models.AndroidEssenceFeed
+import com.example.androidstudyguid.data.models.remote.AndroidEssenceFeed
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
