@@ -18,6 +18,7 @@ import com.example.androidstudyguid.data.apis.AndroidEssenceAPI
 import com.example.androidstudyguid.data.models.ui.Article
 import com.example.androidstudyguid.data.repositories.implementations.AndroidEssenceArticleService
 import com.example.androidstudyguid.databinding.FragmentArticleListBinding
+import com.example.androidstudyguid.utils.visibleIf
 import kotlinx.coroutines.launch
 
 class ArticleListFragment : Fragment() {
@@ -59,9 +60,11 @@ class ArticleListFragment : Fragment() {
     }
 
     private fun subscribeToViewModel() {
-        viewModel.articles.observe(viewLifecycleOwner) { articles ->
+        viewModel.state.observe(viewLifecycleOwner) { state ->
             lifecycleScope.launch {
-                adapter.submitList(articles)
+                binding.progressBar.visibleIf(state.isLoading)
+                binding.articleList.visibleIf(state.isSuccess)
+                adapter.submitList(state.articles)
             }
         }
     }
