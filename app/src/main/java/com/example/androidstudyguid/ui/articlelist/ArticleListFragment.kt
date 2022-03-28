@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ import com.example.androidstudyguid.data.models.ui.Article
 import com.example.androidstudyguid.data.repositories.implementations.AndroidEssenceArticleService
 import com.example.androidstudyguid.databinding.FragmentArticleListBinding
 import com.example.androidstudyguid.utils.visibleIf
-import kotlinx.coroutines.launch
 
 class ArticleListFragment : Fragment() {
     private val viewModel: ArticleListViewModel by viewModels {
@@ -61,12 +59,14 @@ class ArticleListFragment : Fragment() {
 
     private fun subscribeToViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            lifecycleScope.launch {
-                binding.progressBar.visibleIf(state.isLoading)
-                binding.articleList.visibleIf(state.isSuccess)
-                adapter.submitList(state.articles)
-            }
+            displayViewState(state)
         }
+    }
+
+    private fun displayViewState(state: ArticleListViewState) {
+        binding.progressBar.visibleIf(state.isLoading)
+        binding.articleList.visibleIf(state.isSuccess)
+        adapter.submitList(state.articles)
     }
 
     private fun <VH : RecyclerView.ViewHolder> setupRecyclerView(
