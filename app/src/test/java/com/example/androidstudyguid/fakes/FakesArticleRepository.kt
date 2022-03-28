@@ -19,6 +19,4 @@ class FakesArticleRepository : ArticleRepository {
     fun getFetchedArticlesCallCount(): Int {
         return fetchArticlesCallCount
     }
-
-
 }
