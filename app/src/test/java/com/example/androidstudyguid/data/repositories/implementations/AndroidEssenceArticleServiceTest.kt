@@ -5,9 +5,11 @@ import com.example.androidstudyguid.data.models.remote.AndroidEssenceFeed
 import com.example.androidstudyguid.data.models.remote.AndroidEssenceFeedItem
 import com.example.androidstudyguid.data.models.remote.AndroidEssenceLink
 import com.example.androidstudyguid.data.models.ui.Article
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class AndroidEssenceArticleServiceTest {
     private val testRobot = AndroidEssenceArticleServiceTestRobot()
 
