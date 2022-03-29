@@ -1,6 +1,7 @@
 package com.example.androidstudyguid.ui.articlelist
 
 import com.example.androidstudyguid.data.models.ui.Article
+import com.example.androidstudyguid.data.utils.Result
 import com.example.androidstudyguid.fakes.FakesArticleRepository
 import com.example.androidstudyguid.fakes.testObserver
 import com.google.common.truth.Truth.assertThat
@@ -17,7 +18,7 @@ class ArticleListViewModelRobot {
         viewModel = ArticleListViewModel(fakeRepository)
     }
 
-    fun assertViewState(expectedViewState: ArticleListViewState) = apply {
+    fun assertViewState(expectedViewState: Result<List<Article>>) = apply {
         val actualViewState = viewModel.state.testObserver().observedValue
         assertThat(actualViewState).isEqualTo(expectedViewState)
     }
