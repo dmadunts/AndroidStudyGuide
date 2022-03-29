@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidStudyGuid</string>
+    <string name="Retry">Retry</string>
+    <string name="UnknownError">Unknown error</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.androidstudyguid.ui.articlelist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.androidstudyguid.data.models.ui.Article
+import com.example.androidstudyguid.data.utils.Result
 import com.example.androidstudyguid.fakes.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
@@ -26,6 +27,6 @@ class ArticleListViewModelTest {
         testRobot
             .mockArticles(testArticles)
             .buildViewModel()
-            .assertViewState(ArticleListViewState.success(testArticles))
+            .assertViewState(Result.Success(testArticles))
     }
 }
